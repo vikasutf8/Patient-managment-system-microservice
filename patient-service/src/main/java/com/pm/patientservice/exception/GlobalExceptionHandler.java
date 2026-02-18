@@ -1,5 +1,7 @@
 package com.pm.patientservice.exception;
 
+import com.pm.patientservice.sharedDto.ApiResponse;
+import com.pm.patientservice.utils.ResponseUtil;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.*;
 
