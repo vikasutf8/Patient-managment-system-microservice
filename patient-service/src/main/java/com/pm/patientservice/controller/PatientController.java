@@ -10,6 +10,9 @@ import com.pm.patientservice.sharedDto.PageResponse;
 import com.pm.patientservice.sharedDto.ValidateRequestDto.onCreatePatient;
 import com.pm.patientservice.sharedDto.ValidateRequestDto.onUpdatePatient;
 import com.pm.patientservice.utils.ResponseUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,12 +26,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+
+//@Tag(name = "Patient", description = "Patient management APIs")
 @RestController
 @RequestMapping("api/v2/patient")
 @RequiredArgsConstructor
 public class PatientController {
 
     private final PatientService patientService;
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("test");
+    }
 
     @GetMapping("/all")
     public ResponseEntity<ApiResponse<PageResponse<PatientResponseDto>>>getAllpatient(
@@ -54,7 +62,6 @@ public class PatientController {
     }
 
 
-
     @PostMapping
     public ResponseEntity<ApiResponse<PatientResponseDto>> createNewPatient(
             @Validated(onCreatePatient.class) @RequestBody PatientRequestDto request
@@ -76,7 +83,7 @@ public class PatientController {
         return ResponseUtil.ok("Patient updated successfully", updatedPatient);
     }
 
-    @DeleteMapping("clear/{id}")
+    @DeleteMapping("hard/{id}")
     public ResponseEntity<ApiResponse<Void>> deletePatient(@PathVariable UUID id) {
 
         patientService.deletePatient(id);

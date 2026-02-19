@@ -63,4 +63,4 @@ Content-Type: application/json
 }
 
 ### Delete Patient
-DELETE http://localhost:8080/api/v2/patient/3fa85f64-5717-4562-b3fc-2c963f66afa6
+DELETE http://localhost:8080/api/v2/patient/hard/3fa85f64-5717-4562-b3fc-2c963f66afa6
