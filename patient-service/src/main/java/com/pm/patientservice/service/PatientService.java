@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -63,5 +64,20 @@ public class PatientService {
 
         // 4️⃣ Map Entity → Response DTO
         return modelMapper.map(savedPatient, PatientResponseDto.class);
+    }
+
+    public PatientResponseDto updatePatient(UUID id, @Valid PatientRequestDto requestDto) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id: " + id));
+
+        // update fields
+        patient.setName(requestDto.getName());
+        patient.setEmail(requestDto.getEmail());
+        patient.setAddress(requestDto.getAddress());
+        patient.setDob(requestDto.getDob());
+
+        Patient savedPatient = patientRepository.save(patient);
+
+        return mapToDto(savedPatient);
     }
 }

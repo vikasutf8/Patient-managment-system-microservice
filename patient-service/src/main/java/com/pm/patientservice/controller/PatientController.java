@@ -7,6 +7,8 @@ import com.pm.patientservice.exception.ResourceNotFoundException;
 import com.pm.patientservice.service.PatientService;
 import com.pm.patientservice.sharedDto.ApiResponse;
 import com.pm.patientservice.sharedDto.PageResponse;
+import com.pm.patientservice.sharedDto.ValidateRequestDto.onCreatePatient;
+import com.pm.patientservice.sharedDto.ValidateRequestDto.onUpdatePatient;
 import com.pm.patientservice.utils.ResponseUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +16,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v2/patient")
@@ -53,11 +57,23 @@ public class PatientController {
 
     @PostMapping
     public ResponseEntity<ApiResponse<PatientResponseDto>> createNewPatient(
-            @Valid @RequestBody PatientRequestDto request
+            @Validated(onCreatePatient.class) @RequestBody PatientRequestDto request
     ) {
 
         PatientResponseDto response = patientService.createNewPatient(request);
 
         return ResponseUtil.created("Patient created successfully", response);
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity<ApiResponse<PatientResponseDto>> updatePatient(
+            @PathVariable UUID id,
+            @Validated(onUpdatePatient.class) @RequestBody PatientRequestDto requestDto) {
+
+        PatientResponseDto updatedPatient = patientService.updatePatient(id, requestDto);
+
+
+        return ResponseUtil.ok("Patient updated successfully", updatedPatient);
+    }
+
 }

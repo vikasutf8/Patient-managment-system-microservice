@@ -49,3 +49,15 @@ Content-Type: application/json
 #    },
 #    "timestamp": "2026-02-19T20:46:24.772304"
 #}
+
+### Update Patient
+PUT http://localhost:8081/api/v2/patient/3fa85f64-5717-4562-b3fc-2c963f66afa6
+Content-Type: application/json
+
+{
+  "name": "John Updated",
+  "email": "john.updated@gmail.com",
+  "address": "California",
+  "dob": "1995-05-10",
+  "registeredDate": "2026-02-19"
+}

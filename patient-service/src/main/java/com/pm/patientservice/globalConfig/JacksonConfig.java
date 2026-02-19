@@ -9,7 +9,21 @@ import tools.jackson.databind.json.JsonMapper;
 
 @Configuration
 public class JacksonConfig {
+/*
+IMPROTANT
+But for update, blindly mapping is dangerous.
+If you do:
+modelMapper.map(requestDto, patient);
+⚠ Problems:
+It may overwrite fields with null
+It may overwrite id
+It may overwrite createdDate
+It may overwrite relationships
+It may overwrite audit fields
 
+modelMapper.getConfiguration()
+        .setSkipNullEnabled(true);
+ */
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
