@@ -80,4 +80,14 @@ public class PatientService {
 
         return mapToDto(savedPatient);
     }
+
+    public void deletePatient(UUID id) {
+
+            Patient patient = patientRepository.findById(id)
+                    .orElseThrow(() ->
+                            new ResourceNotFoundException("Patient not found with id: " + id));
+
+            patientRepository.delete(patient);
+
+    }
 }
