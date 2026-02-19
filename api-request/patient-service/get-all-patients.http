@@ -1,0 +1,66 @@
+### Get all patients with Correlation ID
+GET http://localhost:8081/api/v2/patient/all?page=0&size=10
+Accept: application/json
+X-Correlation-ID: test-12345
+
+###
+
+#{
+#    "message": "All patients fetched successfully",
+#    "data": {
+#        "content": [
+#            {
+#                "name": "John Doe",
+#                "email": "john@example.com",
+#                "address": "New York",
+#                "registeredDate": "2026-02-19"
+#            }
+#        ],
+#        "last": true,
+#        "page": 0,
+#        "size": 10,
+#        "totalElements": 1,
+#        "totalPages": 1
+#    },
+#    "timestamp": "2026-02-19T20:47:13.133035"
+#}
+
+
+### Create new patient
+POST http://localhost:8081/api/v2/patient
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "address": "New York",
+  "dob": "1998-05-20",
+  "registeredDate": "2026-02-19"
+}
+
+###
+#{
+#    "message": "Patient created successfully",
+#    "data": {
+#        "name": "John Doe",
+#        "email": "john@example.com",
+#        "address": "New York",
+#        "registeredDate": "2026-02-19"
+#    },
+#    "timestamp": "2026-02-19T20:46:24.772304"
+#}
+
+### Update Patient
+PUT http://localhost:8081/api/v2/patient/3fa85f64-5717-4562-b3fc-2c963f66afa6
+Content-Type: application/json
+
+{
+  "name": "John Updated",
+  "email": "john.updated@gmail.com",
+  "address": "California",
+  "dob": "1995-05-10",
+  "registeredDate": "2026-02-19"
+}
+
+### Delete Patient
+DELETE http://localhost:8080/api/v2/patient/hard/3fa85f64-5717-4562-b3fc-2c963f66afa6
