@@ -1,0 +1,51 @@
+### Get all patients with Correlation ID
+GET http://localhost:8081/api/v2/patient/all?page=0&size=10
+Accept: application/json
+X-Correlation-ID: test-12345
+
+###
+
+#{
+#    "message": "All patients fetched successfully",
+#    "data": {
+#        "content": [
+#            {
+#                "name": "John Doe",
+#                "email": "john@example.com",
+#                "address": "New York",
+#                "registeredDate": "2026-02-19"
+#            }
+#        ],
+#        "last": true,
+#        "page": 0,
+#        "size": 10,
+#        "totalElements": 1,
+#        "totalPages": 1
+#    },
+#    "timestamp": "2026-02-19T20:47:13.133035"
+#}
+
+
+### Create new patient
+POST http://localhost:8081/api/v2/patient
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "address": "New York",
+  "dob": "1998-05-20",
+  "registeredDate": "2026-02-19"
+}
+
+###
+#{
+#    "message": "Patient created successfully",
+#    "data": {
+#        "name": "John Doe",
+#        "email": "john@example.com",
+#        "address": "New York",
+#        "registeredDate": "2026-02-19"
+#    },
+#    "timestamp": "2026-02-19T20:46:24.772304"
+#}
